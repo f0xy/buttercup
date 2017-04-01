@@ -38,7 +38,7 @@ class TreeLabel extends Component {
   }
 
   render() {
-    const { title, onRightClick } = this.props;
+    const { title, onRightClick, onDoubleClick } = this.props;
     
     const editMode = title.toLowerCase() === 'untitled';
     const titleLabel = editMode ? (
@@ -55,7 +55,7 @@ class TreeLabel extends Component {
       ) : title;
 
     return (
-      <span onContextMenu={onRightClick} className={styles.node}>
+      <span onDoubleClick={onDoubleClick} onContextMenu={onRightClick} className={styles.node}>
         {titleLabel}
       </span>
     );
@@ -69,7 +69,8 @@ TreeLabel.propTypes = {
   onAddClick: PropTypes.func,
   onRemoveClick: PropTypes.func,
   onSaveClick: PropTypes.func,
-  onRightClick: PropTypes.func
+  onRightClick: PropTypes.func,
+  onDoubleClick: PropTypes.func
 };
 
 export default TreeLabel;

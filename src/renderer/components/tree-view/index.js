@@ -79,6 +79,16 @@ class TreeView extends Component {
     }
   }
 
+  handleDoubleClick = (node) => {
+    const index = this.props.expandedKeys.indexOf(node.id);
+    if(index === -1){
+      this.props.expandedKeys.push(node.id);
+    }else{
+      this.props.expandedKeys.splice(index, 1);
+    }
+    this.props.onExpand(this.props.expandedKeys);
+  }
+
   handleAddClick = (e, id) => {
     if (e) {
       e.stopPropagation();
@@ -131,6 +141,7 @@ class TreeView extends Component {
               <TreeLabel
                 {...node}
                 {...this.props}
+                onDoubleClick={e => this.handleDoubleClick(node)}
                 onRightClick={e => this.handleRightClick(node, groups, e)}
                 onAddClick={this.handleAddClick}
                 onRemoveClick={this.handleRemoveClick}
