@@ -82,11 +82,16 @@ class TreeView extends Component {
   handleDoubleClick = (node) => {
     const index = this.props.expandedKeys.indexOf(node.id);
     if(index === -1){
-      this.props.expandedKeys.push(node.id);
+      this.props.onExpand([
+        ...this.props.expandedKeys, 
+        node.id
+      ]);
     }else{
-      this.props.expandedKeys.splice(index, 1);
+      this.props.onExpand([
+        ...this.props.expandedKeys.slice(0, index),
+        ...this.props.expandedKeys.slice(index + 1)
+      ]);
     }
-    this.props.onExpand(this.props.expandedKeys);
   }
 
   handleAddClick = (e, id) => {
